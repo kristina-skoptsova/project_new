@@ -7,6 +7,9 @@ from django.views.generic.edit import CreateView
 def home(request):
     return render(request, "users/home.html")
 
+def profile(request):
+    return render(request, "users/profile.html")
+
 
 class SignUp(CreateView):
     form_class = UserCreationForm

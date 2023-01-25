@@ -1,12 +1,14 @@
+{% extends 'users/basa.html' %}
 {% block content %}
-<h2>Register</h2>
+<h2>Регистрация</h2>
 
 <form method="post">
     {% csrf_token %}
     {{form}}
-    <input type="submit" value="Register">
+    <input type="submit" value="Зарегистрироваться">
 </form>
 
-<a href="{% url 'login' %}">Back to login</a>
-<a href="{% url 'home' %}">Back to Home</a>
+<a href="{% url 'login' %}"></a>
+<a href="{% url 'login' %}">Уже есть логин?</a>
+<a href="{% url 'home' %}">Вернуться на главную страницу</a>
 {% endblock %}

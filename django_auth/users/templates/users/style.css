@@ -3,7 +3,7 @@ body {
 	font-family: 'Noto Sans', sans-serif;
 	font-size: 16px;
 	line-height: 1.4;
-	color: #000;
+	color: #fffafa;
 	min-width: 320px;
 	overflow-x: hidden;
 	height: auto;
@@ -19,3 +19,42 @@ body {
     justify-container: space-between;
     align-items: center;
 }
+.navbar-menu{
+    list-style-type: none;
+    padding-Left: 0;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+.navbar-menu li{
+    dispLay: inline-block;
+}
+.navbar-menu li a{
+    dispLay: inline-block;
+    color: #fffafa;
+    opacity: 1;
+    padding: 10px;
+    transition: all .07s ease-in-out;
+}
+
+.navbar-menu li a:hover{
+    opacity: 1;
+    color: DodgerBlue;
+}
+
+.navbar-wrap{
+    dispLay: flex;
+    flex-flow: row nowrap;
+}
+
+.callback{
+    margin-Left: 20px;
+    padding: 10px;
+}
+.navbar-brand{
+    font-weight: 700;
+    font-size: 30px;
+    text-decoration: none;
+    color: #fffafa;
+}
+.navbar-brand:hover{
+    color: DodgerBlue;
