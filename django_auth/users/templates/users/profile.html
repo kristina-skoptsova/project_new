@@ -1,7 +1,16 @@
 {% extends 'users/basa.html' %}
-
+{% load crispy_forms_tags %}
+{% load static %}
 {% block title %}Профиль{% endblock %}
 
 {% block content %}
-    <h2>Твой профиль</h2>
-{% endblock %}
+	<div class="content-section">
+  	<div class="media">
+    	<img class="rounded-circle account-img" src="{% static 'media/default.png' %}">
+    	<div class="media-body">
+      	<h2 class="account-heading">{{ user.username }}</h2>
+    	</div>
+  	</div>
+  	<!-- Здесь будет форма -->
+	</div>
+{% endblock content %}

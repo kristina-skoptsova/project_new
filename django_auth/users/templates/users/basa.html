@@ -25,18 +25,13 @@
          <a href="{% url 'home' %}" class="navbar-brand">Игра</a>
           <div class="navbar-wrap">
               <ul class="navbar-menu">
-                <li>{% if user.is_authenticated %}
-                  <a href="{% url 'logout' %}">Выйти</a>
-                </li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'logout' %}">Выйти</a></li>
                   <li><a href="{% url 'profile' %}">Профиль</a></li>
-                <li>
                   {% else %}
-                    <a href="{% url 'signup' %}">Регистрация</a>
-                </li>
-                <li>
-                  <a href="{% url 'login' %}">Войти</a>
+                  <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                  <li><a href="{% url 'login' %}">Войти</a></li>
                 {% endif %}
-                </li>
               </ul>
           </div>
         </div>
