@@ -4,13 +4,27 @@
 {% block title %}Профиль{% endblock %}
 
 {% block content %}
-	<div class="content-section">
-  	<div class="media">
-    	<img class="rounded-circle account-img" src="{% static 'media/default.png' %}">
-    	<div class="media-body">
-      	<h2 class="account-heading">{{ user.username }}</h2>
-    	</div>
-  	</div>
-  	<!-- Здесь будет форма -->
+	<div class="container" align="center">
+		<div class="content-section">
+			<div class="media">
+				<div class="media-left">
+					<img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="cursor: pointer; width: 200px; height: 200px">
+				</div>
+				<div class="media-body">
+					<h1 class="account-heading">{{ user.username }}</h1>
+				</div>
+			</div>
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+          		<fieldset class="form-group">
+              		<legend class="border-bottom mb-4">Ваш профиль</legend>
+              		{{ p_form|crispy }}
+          		</fieldset>
+          		<div class="form-group">
+              		<button class="btn btn-outline-info" type="submit">Обновить</button>
+          		</div>
+      		</form>
+		</div>
+		</div>
 	</div>
 {% endblock content %}
