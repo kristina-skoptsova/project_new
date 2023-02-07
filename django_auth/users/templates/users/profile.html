@@ -4,27 +4,33 @@
 {% block title %}Профиль{% endblock %}
 
 {% block content %}
-	<div class="container" align="center">
+<style type="text/css">
+	#text-block {
+	margin-top: 20px;
+	}
+   #pic {
+    float: left; /* Обтекание картинки текстом */
+   }
+   #text {
+    margin-left: 300px; /* Отступ от левого края */
+   }
+  </style>
+	<div class="container" id="text-block">
 		<div class="content-section">
 			<div class="media">
-				<div class="media-left">
-					<img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="cursor: pointer; width: 200px; height: 200px">
+				<div class="media-left" id="pic">
+					<img class="media-object" src="{{ user.profile.image.url }}" style="cursor: pointer; width: 200px; height: 200px">
 				</div>
-				<div class="media-body">
-					<h1 class="account-heading">{{ user.username }}</h1>
+				<div class="media-body" id="text">
+					<h2 class="account-heading">Имя пользователя: {{ user.username }}</h2>
 				</div>
 			</div>
-			<form method="POST" enctype="multipart/form-data">
-				{% csrf_token %}
-          		<fieldset class="form-group">
-              		<legend class="border-bottom mb-4">Ваш профиль</legend>
-              		{{ p_form|crispy }}
-          		</fieldset>
-          		<div class="form-group">
-              		<button class="btn btn-outline-info" type="submit">Обновить</button>
-          		</div>
-      		</form>
 		</div>
+		<form method="POST" enctype="multipart/form-data" id="text">
+			{% csrf_token %}
+			{{ p_form|crispy }}
+			<button class="btn btn-outline-info" type="submit">Обновить</button>
+		</form>
 		</div>
 	</div>
 {% endblock content %}
