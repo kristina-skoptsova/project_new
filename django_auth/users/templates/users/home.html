@@ -2,15 +2,16 @@
 {% load static %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-{% block title %}Главная{% endblock %}
-<body>
+{% block title %}Flappy Bird{% endblock %}
 
- <canvas id="canvas" width="288" height="512"></canvas>
-
- <script src="{% static 'js/game.js' %}"></script>
-</body>
 {% block content %}
     <h1 align="center">Привет, {{ user.username|default:'Гость' }}</h1>
     <p align="center"> Добро пожаловать на сайт</p>
-{% endblock %}
+ <body>
+<center>
+ <canvas id="canvas" width="288" height="512"></canvas>
+ <script type="text/javascript" src="{% static 'js/game.js' %}"></script>
+</center>
+ </body>
 
+{% endblock %}
