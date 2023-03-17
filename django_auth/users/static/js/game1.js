@@ -14,7 +14,7 @@ pipeUp.src = "static/img/pipeUp.png";
 pipeBottom.src = "static/img/pipeBottom.png";
 
 var gap = 90;
-
+var GameOver = false;
 // При нажатии на кнопку
 document.addEventListener('keydown', moveUp);
 function moveUp() {
@@ -71,3 +71,5 @@ function draw() {
 }
 pipeBottom.onload = draw;
 
+
+}
