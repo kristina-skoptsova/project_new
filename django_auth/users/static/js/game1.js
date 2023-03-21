@@ -6,20 +6,23 @@ var bg = new Image(); // Создание объекта
 var fg = new Image();
 var pipeUp = new Image();
 var pipeBottom = new Image();
+var gmOvr = new Image();
 
 bird.src = "static/img/bird.png"; // Указание нужного изображения
 bg.src = "static/img/bg.png";
 fg.src = "static/img/fg.png";
 pipeUp.src = "static/img/pipeUp.png";
 pipeBottom.src = "static/img/pipeBottom.png";
+gmOvr.src = "static/img/gmOvr.png";
 
 var gap = 90;
-var GameOver = false;
+var  restartBtn = window.document.querySelector('#restart')
 // При нажатии на кнопку
 document.addEventListener('keydown', moveUp);
 function moveUp() {
     yPos -= 25;
 }
+
 
 //Создание блоков
 var pipe = [];
@@ -34,6 +37,19 @@ var yPos = 150;
 var grav = 1.5;
 
 
+function gameOver() {
+        ctx.drawImage(gmOvr, cvs.height/2-200, cvs.width/2, 200, 80)
+        ctx.fillStyle = '#000';
+            ctx.font = '24px Verdana';
+            ctx.fillText('Ваш счет: ' + score, 10, cvs.height - 20)
+        cancelAnimationFrame(draw)
+        restart()
+}
+function restart() {
+    restartBtn.addEventListener('click', ()=>{
+    window.document.location.reload();
+    });
+}
 function draw() {
     ctx.drawImage(bg, 0, 0);
     for(var i=0; i < pipe.length; i++) {
@@ -51,13 +67,16 @@ function draw() {
         if(xPos + bird.width >=pipe[i].x
            && xPos <= pipe[i].x + pipeUp.width
            && (yPos <= pipe[i].y + pipeUp.height || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
-                location.reload(); //Заново начинается игра
+                pipe.splice(0, pipe.length)
+                gameOver();
+                //Заново начинается игра
            }
+
         if(pipe[i].x == 5) {
             score++;
         }
-    }
 
+    }
 
     ctx.drawImage(fg, 0, cvs.height - fg.height);
     ctx.drawImage(bird, xPos, yPos);
@@ -70,6 +89,3 @@ function draw() {
     requestAnimationFrame(draw)
 }
 pipeBottom.onload = draw;
-
-
-}
