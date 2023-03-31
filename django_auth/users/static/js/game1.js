@@ -50,6 +50,20 @@ function restart() {
     window.document.location.reload();
     });
 }
+
+function save(){
+    localStorage.setItem('score', JSON.stringify(score));
+}
+function load(){
+    score = JSON.parse(localStorage.getItem('score'));
+    
+}
+
+function scr() {
+    score = load();
+    document.getElementById("score").innerHTML = score;
+}
+
 function draw() {
     ctx.drawImage(bg, 0, 0);
     for(var i=0; i < pipe.length; i++) {
