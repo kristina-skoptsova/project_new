@@ -16,7 +16,10 @@ pipeBottom.src = "static/img/pipeBottom.png";
 gmOvr.src = "static/img/gmOvr.png";
 
 var gap = 90;
-var  restartBtn = window.document.querySelector('#restart')
+var  restartBtn = window.document.querySelector('#restart');
+var user = document.getElementById('user').innerText;
+
+var save_key = 'save';
 // При нажатии на кнопку
 document.addEventListener('keydown', moveUp);
 function moveUp() {
@@ -36,6 +39,10 @@ var xPos = 5;
 var yPos = 150;
 var grav = 1.5;
 
+var state = {
+    user: user,
+    score: score,
+};
 
 function gameOver() {
         ctx.drawImage(gmOvr, cvs.height/2-200, cvs.width/2, 200, 80)
@@ -49,21 +56,30 @@ function restart() {
     restartBtn.addEventListener('click', ()=>{
     window.document.location.reload();
     });
+    save()
+    load()
 }
 
-function save(){
-    localStorage.setItem('score', JSON.stringify(score));
-}
-function load(){
-    score = JSON.parse(localStorage.getItem('score'));
-    
-}
+//var startBtn = document.getElementById('start')
+//if(startBtn){
+  //startBtn.addEventListener('click', startGame);
+//}
 
-function scr() {
-    score = load();
-    document.getElementById("score").innerHTML = score;
+function getRecentGames(user){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET','/api/games?user='+ user +'&limit=10', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send();
+    xhr.onload = function(){
+        if (xhr.status === 200){
+            var games = JSON.parse(xhr.responseText);
+            console.log(games);
+        }
+        else{
+            console.error('Ошибка Запроса:'+xhr.statusText);
+        }
+    };
 }
-
 function draw() {
     ctx.drawImage(bg, 0, 0);
     for(var i=0; i < pipe.length; i++) {
@@ -99,7 +115,15 @@ function draw() {
     ctx.fillStyle = '#000';
     ctx.font = '24px Verdana';
     ctx.fillText('Счет: ' + score, 10, cvs.height - 20)
-
     requestAnimationFrame(draw)
 }
 pipeBottom.onload = draw;
+
+function save(){
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('score', JSON.stringify(score));
+}
+function load(){
+    user = JSON.parse(localStorage.getItem('user'));
+    score = JSON.parse(localStorage.getItem('score'));
+}

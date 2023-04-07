@@ -7,14 +7,13 @@
 {% block content %}
     <h1 align="center">Привет, {{ user.username|default:'Гость' }}</h1>
     <p align="center"> Добро пожаловать на сайт</p>
+    <p id="user">{{ user.username }}</p>
  <body>
 <center>
  <input id="restart" type="button" value="Restart"/>
  <canvas id="canvas" width="288" height="512"></canvas>
  <script type="text/javascript" src="{% static 'js/game1.js' %}"></script>
  <canvas id="restartCanvas" style="display: none;">Restart</canvas>
- <div id="score"></div>
- <button type="button" onclick="scr()">Вывести счет</button>
 </center>
  </body>
 
