@@ -6,7 +6,6 @@ from django.shortcuts import render
 from .forms import ProfileUpdateForm
 from django.contrib import messages
 
-
 def home(request):
     return render(request, "users/home.html")
 

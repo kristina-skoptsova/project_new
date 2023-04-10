@@ -56,14 +56,8 @@ function restart() {
     restartBtn.addEventListener('click', ()=>{
     window.document.location.reload();
     });
-    save()
-    load()
+    addScore()
 }
-
-//var startBtn = document.getElementById('start')
-//if(startBtn){
-  //startBtn.addEventListener('click', startGame);
-//}
 
 function getRecentGames(user){
     var xhr = new XMLHttpRequest();
@@ -118,12 +112,19 @@ function draw() {
     requestAnimationFrame(draw)
 }
 pipeBottom.onload = draw;
-
-function save(){
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('score', JSON.stringify(score));
+var limit = 5;
+function addScore(){
+    existingScore = JSON.parse(localStorage.getItem(user));
+    if(existingScore == null) existingScore = [];
+    var dict_t = {
+        'score': score,
+    }
+    existingScore.push(dict_t);
+    localStorage.setItem(user, JSON.stringify(existingScore));
 }
-function load(){
-    user = JSON.parse(localStorage.getItem('user'));
-    score = JSON.parse(localStorage.getItem('score'));
+var dict2 = addScore()
+function withdrawal_account(dict1){
+    for (let el = dict1.length - 6; el<dict1.length; el++)
+        console.log(dict1[el]);
 }
+withdrawal_account(dict2)
