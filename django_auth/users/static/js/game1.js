@@ -26,7 +26,6 @@ function moveUp() {
     yPos -= 25;
 }
 
-
 //Создание блоков
 var pipe = [];
 pipe[0] = {
@@ -59,21 +58,6 @@ function restart() {
     addScore()
 }
 
-function getRecentGames(user){
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET','/api/games?user='+ user +'&limit=10', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send();
-    xhr.onload = function(){
-        if (xhr.status === 200){
-            var games = JSON.parse(xhr.responseText);
-            console.log(games);
-        }
-        else{
-            console.error('Ошибка Запроса:'+xhr.statusText);
-        }
-    };
-}
 function draw() {
     ctx.drawImage(bg, 0, 0);
     for(var i=0; i < pipe.length; i++) {
@@ -116,15 +100,18 @@ var limit = 5;
 function addScore(){
     existingScore = JSON.parse(localStorage.getItem(user));
     if(existingScore == null) existingScore = [];
-    var dict_t = {
-        'score': score,
-    }
+    var dict_t = score;
     existingScore.push(dict_t);
     localStorage.setItem(user, JSON.stringify(existingScore));
+    return existingScore
 }
-var dict2 = addScore()
+
 function withdrawal_account(dict1){
-    for (let el = dict1.length - 6; el<dict1.length; el++)
-        console.log(dict1[el]);
+    var array_last_five = Object.values(dict1);
+    ///arr.slice(-5)
+    console.log(array_last_five);
 }
-withdrawal_account(dict2)
+withdrawal_account(addScore)
+///array_score = withdrawal_account(dict1)
+///document.getElementById("text").innerText += withdrawal_account(dict1)
+

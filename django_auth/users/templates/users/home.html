@@ -9,12 +9,14 @@
     <p align="center"> Добро пожаловать на сайт</p>
     <p id="user">{{ user.username }}</p>
  <body>
+ <div id="text">Последние игры</div>
 <center>
  <input id="restart" type="button" value="Restart"/>
  <canvas id="canvas" width="288" height="512"></canvas>
  <script type="text/javascript" src="{% static 'js/game1.js' %}"></script>
  <canvas id="restartCanvas" style="display: none;">Restart</canvas>
 </center>
+
  </body>
 
 {% endblock %}
