@@ -19,7 +19,6 @@ var gap = 90;
 var  restartBtn = window.document.querySelector('#restart');
 var user = document.getElementById('user').innerText;
 
-var save_key = 'save';
 // При нажатии на кнопку
 document.addEventListener('keydown', moveUp);
 function moveUp() {
@@ -37,11 +36,6 @@ var score = 0;
 var xPos = 5;
 var yPos = 150;
 var grav = 1.5;
-
-var state = {
-    user: user,
-    score: score,
-};
 
 function gameOver() {
         ctx.drawImage(gmOvr, cvs.height/2-200, cvs.width/2, 200, 80)
@@ -96,22 +90,25 @@ function draw() {
     requestAnimationFrame(draw)
 }
 pipeBottom.onload = draw;
-var limit = 5;
+
 function addScore(){
     existingScore = JSON.parse(localStorage.getItem(user));
     if(existingScore == null) existingScore = [];
     var dict_t = score;
     existingScore.push(dict_t);
     localStorage.setItem(user, JSON.stringify(existingScore));
-    return existingScore
+    array_last_five = existingScore.slice(-5)
+    document.getElementById("text").innerText += array_last_five
+    return array_last_five
 }
 
-function withdrawal_account(dict1){
-    var array_last_five = Object.values(dict1);
-    ///arr.slice(-5)
-    console.log(array_last_five);
+function withdrawal_account(){
+    var a = array_last_five;
+    console.log(a);
 }
-withdrawal_account(addScore)
+
+///console.log(withdrawal_account())
+
 ///array_score = withdrawal_account(dict1)
 ///document.getElementById("text").innerText += withdrawal_account(dict1)
 
