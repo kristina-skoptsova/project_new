@@ -51,7 +51,6 @@ function restart() {
     });
     addScore()
 }
-
 function draw() {
     ctx.drawImage(bg, 0, 0);
     for(var i=0; i < pipe.length; i++) {
@@ -73,11 +72,9 @@ function draw() {
                 gameOver();
                 //Заново начинается игра
            }
-
         if(pipe[i].x == 5) {
             score++;
         }
-
     }
 
     ctx.drawImage(fg, 0, cvs.height - fg.height);
@@ -102,13 +99,22 @@ function addScore(){
     return array_last_five
 }
 
-function withdrawal_account(){
-    var a = array_last_five;
-    console.log(a);
+function updateLeaderBoard(){
+    const leaderBoard = JSON.parse(localStorage.getItem(user)) || [];
+    //const maxScore = Math.max(...leaderBoard)
+    leaderBoard.sort((a, b) => b.score - a.score);
+    const leaderBoardTable = document.querySelector('#leaderboard tbody');
+    leaderBoardTable.innerText = '';
+    //заполнение таблицы
+    leaderBoard.forEach((player) => {
+        const row = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        const scoreCell = document.createElement('td');
+        nameCell.textContent = player.user;
+        scoreCell.textContent = player.score;
+        row.appendChild(nameCell);
+        row.appendChild(scoreCell);
+        leaderBoardTable.appendChild(row);
+    });
 }
-
-///console.log(withdrawal_account())
-
-///array_score = withdrawal_account(dict1)
-///document.getElementById("text").innerText += withdrawal_account(dict1)
-
+window.addEventListener('load', updateLeaderBoard);
