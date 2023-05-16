@@ -96,25 +96,25 @@ function addScore(){
     localStorage.setItem(user, JSON.stringify(existingScore));
     array_last_five = existingScore.slice(-5)
     document.getElementById("text").innerText += array_last_five
-    return array_last_five
+    return existingScore
 }
-
-function updateLeaderBoard(){
-    const leaderBoard = JSON.parse(localStorage.getItem(user)) || [];
-    //const maxScore = Math.max(...leaderBoard)
-    leaderBoard.sort((a, b) => b.score - a.score);
-    const leaderBoardTable = document.querySelector('#leaderboard tbody');
-    leaderBoardTable.innerText = '';
-    //заполнение таблицы
-    leaderBoard.forEach((player) => {
+const leaderBoard = localStorage;
+function addResult(){
+    const users = Object.keys(leaderBoard).map(user => ({
+        user,
+        score: leaderBoard[user]
+    }));
+    users.sort((a, b) => Math.max(...b.score) - Math.max(...a.score));
+    const leaderBoardTable = document.getElementById('leaderboard');
+    users.forEach(user => {
         const row = document.createElement('tr');
-        const nameCell = document.createElement('td');
-        const scoreCell = document.createElement('td');
-        nameCell.textContent = player.user;
-        scoreCell.textContent = player.score;
-        row.appendChild(nameCell);
-        row.appendChild(scoreCell);
-        leaderBoardTable.appendChild(row);
+        const userCell = document.createElement('td');
+        userCell.textContent = user.user;
+        row.appendChild(userCell);
+        const bestScoreCell = document.createElement('td');
+        bestScoreCell.textContent = Math.max(...user.score);
+        row.appendChild(bestScoreCell);
+        leaderBoardTable.querySelector('tbody').appendChild(row);
     });
 }
-window.addEventListener('load', updateLeaderBoard);
+window.addEventListener('load', addResult);
