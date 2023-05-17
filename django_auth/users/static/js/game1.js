@@ -91,9 +91,10 @@ pipeBottom.onload = draw;
 function addScore(){
     existingScore = JSON.parse(localStorage.getItem(user));
     if(existingScore == null) existingScore = [];
-    var dict_t = score;
-    existingScore.push(dict_t);
+    var array_score = score;
+    existingScore.push(array_score);
     localStorage.setItem(user, JSON.stringify(existingScore));
+    localStorage.removeItem("");
     array_last_five = existingScore.slice(-5)
     document.getElementById("text").innerText += array_last_five
     return existingScore
@@ -102,7 +103,7 @@ const leaderBoard = localStorage;
 function addResult(){
     const users = Object.keys(leaderBoard).map(user => ({
         user,
-        score: leaderBoard[user]
+        score: JSON.parse(leaderBoard[user])
     }));
     users.sort((a, b) => Math.max(...b.score) - Math.max(...a.score));
     const leaderBoardTable = document.getElementById('leaderboard');

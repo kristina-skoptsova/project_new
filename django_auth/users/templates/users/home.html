@@ -9,9 +9,20 @@
     <p align="center"> Добро пожаловать на сайт</p>
     <p id="user">{{ user.username }}</p>
  <body>
- <div id="text">Последние игры: </div>
- <h1>Таблица лидеров</h1>
- <table id="leaderboard">
+ <style>
+     table {
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid white;
+    padding: 8px;
+    text-align: left;
+}
+ </style>
+<center>
+ <div id="text" align="left">Последние игры: </div>
+ <h2 align="left">Таблица лидеров</h2>
+ <table align="left" id="leaderboard">
     <thead>
     <tr>
         <th>Имя игрока</th>
@@ -21,7 +32,6 @@
      <tbody>
      </tbody>
  </table>
-<center>
  <input id="restart" type="button" value="Restart"/>
  <canvas id="canvas" width="288" height="512"></canvas>
  <script type="text/javascript" src="{% static 'js/game1.js' %}"></script>
