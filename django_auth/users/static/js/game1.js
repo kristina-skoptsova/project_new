@@ -16,7 +16,7 @@ pipeBottom.src = "static/img/pipeBottom.png";
 gmOvr.src = "static/img/gmOvr.png";
 
 var gap = 90;
-var  restartBtn = window.document.querySelector('#restart');
+var restartBtn = window.document.querySelector('#restartBtn');
 var user = document.getElementById('user').innerText;
 
 // При нажатии на кнопку
@@ -42,14 +42,12 @@ function gameOver() {
         ctx.fillStyle = '#000';
             ctx.font = '24px Verdana';
             ctx.fillText('Ваш счет: ' + score, 10, cvs.height - 20)
+        restartBtn.addEventListener('click', ()=>{
+            window.document.location.reload();
+        });
+        addScore()
         cancelAnimationFrame(draw)
-        restart()
-}
-function restart() {
-    restartBtn.addEventListener('click', ()=>{
-    window.document.location.reload();
-    });
-    addScore()
+
 }
 function draw() {
     ctx.drawImage(bg, 0, 0);
