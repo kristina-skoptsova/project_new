@@ -27,12 +27,11 @@ def profile(request):
             p_form.save()
             messages.success(request, f'Ваш профиль успешно обновлен.')
             return redirect('profile')
-
     else:
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'p_form': p_form
     }
-
     return render(request, 'users/profile.html', context)
+
